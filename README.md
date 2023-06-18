@@ -10,4 +10,4 @@ This project involved the implementation of Python scripts to examine whether ba
 By combining the analysis of bacterial restriction enzymes and the comprehensive study of anti-restriction enzymes in phages, this research provides valuable insights into the interplay between phages and bacteria. Understanding these mechanisms is crucial for the development of effective phage-based therapies against antibiotic-resistant bacteria.
 
 ### General info
-In this repository, you can find the Python file for the analysis, a restriction enzyme file (with Escherichia coli REs), some FASTA files of bacteriophage genomes, and some examples of the result file. Not all analyzed genomes can be found here, because of the large memory usage.
+In this repository, you can find the Python file for the analysis (RE_analysis.py), a restriction enzyme file of E. coli REs (restriction_enzyme_file.txt), some FASTA files of bacteriophage genomes (i.e.: bacteriophage_ecoli_lambda.fasta), and some examples of the result file (i.e.: results_lambda.txt and new_counting_lambda.txt). Not all analyzed genomes can be found in this repository, because of the large memory usage.

@@ -31,12 +31,12 @@ def lines_to_line(list0:list[str])->str:
 
 #Reads in all required file and create a output file
 
-#command line: python path/'\Code and Files'\RE_analysis.py '.\Code and Files\fasta_file.fasta' '.\Code and Files\restriction_enzymes_file.txt' 'result.txt'
-#Example: C:\Users\Joana\Desktop\Project1stYear\Code and Files\RE_analysis.py' '.\Code and Files\bacteriophage_lambda_ecoli.fasta' '.\Code and Files\restriction_enzymes_file.txt' 'result.txt
+#command line: python path\'Code and Files'\RE_analysis.py '.\Code and Files\fasta_file.fasta' '.\Code and Files\restriction_enzymes_file.txt' 'result.txt'
+#Example: 'C:\Users\Joana\Desktop\Project1stYear\Code and Files\RE_analysis.py' '.\Code and Files\bacteriophage_lambda_ecoli.fasta' '.\Code and Files\restriction_enzymes_file.txt' 'result.txt
 
-sequence_file= open(argv[1], "r") #reads in FASTA file with nucleotide sequence
-enzyme_file= open(argv[2], "r") #reads in text file with restriction enzymes
-output_file= open(argv[3], "w") #write the output to new file (must indicate the type, like .txt)
+sequence_file= open(argv[1], "r") #reads in FASTA file with nucleotide sequence (ex: 'bacteriophage_ecoli_lambda.fasta')
+enzyme_file= open(argv[2], "r") #reads in text file with restriction enzymes  (ex: 'restriction_enzymes_file.txt')
+output_file= open(argv[3], "w") #write the output to new file (ex: 'result_lambda.txt')
 
 output_file.write(f"Restriction enzyme analysis of nucleotide sequence from file {argv[1]}.\n Cutting with enzymes from file {argv[2]}.")
 output_file.write("\n" + '-' * 80 + "\n")

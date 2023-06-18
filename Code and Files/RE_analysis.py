@@ -1,6 +1,9 @@
+"""
+@author Joana Araújo
+"""
+
 from sys import argv 
 import re
-import pandas as pd
     
 def format(string, bps:int = 10, group:int = 66)->list[str]:
     """
@@ -26,8 +29,10 @@ def lines_to_line(list0:list[str])->str:
     list = ''.join(b)
     return(list)
 
-#Reads in all required file, and create a output file for report.
-#command line: python /Users/user/Desktop/UNI/MESTRADO/2º semestre/Projeto/new_test_web.py fasta_seq.fasta enzymes.txt resultado.txt
+#Reads in all required file and create a output file
+
+#command line: python path/'\Code and Files'\RE_analysis.py '.\Code and Files\fasta_file.fasta' '.\Code and Files\restriction_enzymes_file.txt' 'result.txt'
+#Example: C:\Users\Joana\Desktop\Project1stYear\Code and Files\RE_analysis.py' '.\Code and Files\bacteriophage_lambda_ecoli.fasta' '.\Code and Files\restriction_enzymes_file.txt' 'result.txt
 
 sequence_file= open(argv[1], "r") #reads in FASTA file with nucleotide sequence
 enzyme_file= open(argv[2], "r") #reads in text file with restriction enzymes
@@ -44,7 +49,7 @@ if first_line.startswith(">"):      #If the first line contains the header ">", 
     sequence = lines_to_line(sequence1) #uses lines_to_line function to combine lines into one string line
     
 else:
-    sequence_name = "N/A"         #if there is no '>', use N/A as sequence name
+    sequence_name = "N/A"   #if there is no '>', use N/A as sequence name
     sequence1 = [first_line] + sequence_file.readlines() #take the first and rest lines as whole sequence
     sequence= lines_to_line(sequence1)
 
@@ -71,14 +76,12 @@ def get_pattern(s:str)->list[str]:
 no_cut = []
 enzyme_counts = {}
 for line in enzyme_file.readlines(): #read in each restriction enzyme, their sequence and their cutting site
-    enzyme_name, enzyme_pattern = line.strip().split(";")  #strip by ";" (as in the enzyme_file) to get the enzyme name then the enzyme pattern
+    enzyme_name, enzyme_pattern = line.strip().split(";")  #strip by ";" (as in the restriction_enzyme_file) to get the enzyme name then the enzyme pattern
     enzyme_pattern = get_pattern(enzyme_pattern)  #apply get_pattern function to get the pattern of ambiguous nucleotides
     print(line)
     before_cutting_site, after_cutting_site = enzyme_pattern.split("|") #the '|' indicates the cleavage site
     
-    cutting_sites = []   #list to cut sites
-
-
+    cutting_sites = [] 
     
     for seq in re.finditer(before_cutting_site + after_cutting_site, sequence):  #find all hits that match the enzyme pattern in the sequence
         match_site = seq.start()      #get the index of start matching position
@@ -103,6 +106,7 @@ for line in enzyme_file.readlines(): #read in each restriction enzyme, their seq
         no_cut.append(enzyme_name)
 output_file.write('-' * 80 + f"\nThere are no cutting sites for {no_cut} in this nucleotide sequence.\n")
 
+
 # Visualization
 most_cut_enzyme = max(sorted(enzyme_counts.values(), reverse = True))
 least_cut_enzyme = min(sorted(enzyme_counts.values(), reverse = True))
@@ -118,7 +122,7 @@ less_ten = []
 ten_to_hundred = []
 more_hundred = []
 val = map(int, enzyme_counts.values())
-print(type(val))
+#print(type(val))
 
 for enzyme, value in enzyme_counts.items():
     if 1 <= value < 10:
@@ -135,12 +139,12 @@ print("More than 100:", more_hundred)
 a = len(ten_to_hundred)
 b = len(less_ten)
 c = len(more_hundred)
-d = a+b+c
-print(d)
+d = a+b+c  # total number of enzymes that can cut the genome
+print(d)   #if d < 404 (total enzymes) means that some enzymes do not cut the genome
 
 def create_result_file(filename)->None:
     """
-    @brief Function to create a result file
+    @brief Function to create a result file for graphical analysis
     @param filename: name of the file to create
     """
     less_ten_count = len(less_ten)
@@ -156,10 +160,10 @@ def create_result_file(filename)->None:
         file.write("{} enzymes cut more than 100 times\n".format(more_hundred_count))
         file.write("{} enzymes have no cuts in this phage\n".format(no_cut_count))
 
-create_result_file(filename="new_counting_T66.txt")
+create_result_file(filename="new_counting_lambda.txt")  
 
 
   
-sequence_file.close()  #Close all files
+sequence_file.close() 
 enzyme_file.close()
 output_file.close()

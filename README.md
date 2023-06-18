@@ -2,7 +2,7 @@
 
 ## Development of a tool that detects anti-restriction mechanisms in phages genomes
 
-The rise of antibiotic resistance in bacteria poses a significant public health concern. Given the known antibiotic potential of phages, this study aims to uncover the anti-restriction mechanisms employed by phages to counteract bacterial defense mechanisms and, thereby, remain within the host and eliminate it.
+The rise of antibiotic resistance in bacteria poses a significant public health concern. Given the known antibiotic potential of phages, this study aims to uncover the anti-restriction mechanisms employed by phages to counteract bacterial defense mechanisms and, thereby, remain within the host.
 
 ### Description:
 This project involved the implementation of Python scripts to examine whether bacterial restriction enzymes can cleave the genomes of phages and infer their prevalence within the host. Furthermore, an extensive investigation was conducted to identify and analyze the various anti-restriction enzymes employed by phages. These enzymes play a crucial role in evading the defense mechanisms of bacteria, contributing to the persistence and survival of phages within their hosts.
